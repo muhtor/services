@@ -1,5 +1,4 @@
-# Django VIRD Project
-Creating E-Commerce for Bespo Clothes
+# Project Custom Services
 
 ### How to clone project
 
