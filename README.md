@@ -3,5 +3,5 @@
 ### How to clone project
 
 ```
-git clone https://github.com/muhtor/vird.git
+https://github.com/muhtor/services.git
 ```
