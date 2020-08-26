@@ -1,5 +1,8 @@
 from django.shortcuts import render, HttpResponse
 from django.views import View
+from .decorators import set_str_upper, set_array
+
+
 # Create your views here.
 
 
@@ -35,6 +38,18 @@ class PriceView(View):
 class Separator(View):
     template_name = "separator.html"
 
+    @set_str_upper
+    def get_str_upper(self, str_obj):
+        return str_obj
+
+    print(get_str_upper('alik'))  # ALIK
+
+    @set_array
+    def get_array(self, str_obj):
+        return str_obj
+
+    print(get_array('Hello world'))  # ['Hello', 'world']
+
     def get(self, request):
         if request.method == 'GET':
             vowels = "a", "e", "i", "o", "u", "A", "E", "I", "O", "U"
@@ -58,3 +73,4 @@ class Separator(View):
                 return render(request, self.template_name, context)
             except KeyError:
                 return render(request, self.template_name, {'data': '...'})
+
