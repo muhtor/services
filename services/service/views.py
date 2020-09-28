@@ -7,6 +7,7 @@ from .decorators import set_str_upper, set_array
 
 
 class PriceView(View):
+    """http://127.0.0.1:8000/service/separator"""
     template_name = "price.html"
 
     def get(self, request):
@@ -36,21 +37,20 @@ class PriceView(View):
 
 
 class Separator(View):
+    """http://127.0.0.1:8000/service/price"""
     template_name = "separator.html"
 
-    @set_str_upper
-    def get_str_upper(self, str_obj):
-        return str_obj
-
-    print(get_str_upper('alik'))  # ALIK
-
-    @set_array
-    def get_array(self, str_obj):
-        return str_obj
-
-    print(get_array('Hello world'))  # ['Hello', 'world']
-
     def get(self, request):
+        @set_str_upper
+        def get_str_upper(str_obj):
+            return str_obj
+        print(get_str_upper('alik'))  # ALIK
+
+        @set_array
+        def get_array(str_obj):
+            return str_obj
+        print(get_array('Hello world'))  # ['Hello', 'world']
+
         if request.method == 'GET':
             vowels = "a", "e", "i", "o", "u", "A", "E", "I", "O", "U"
             consonants = "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z", \
