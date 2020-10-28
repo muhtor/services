@@ -1,7 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.views import View
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .decorators import set_str_upper, set_array
-
+from .serializers import PersonSerializer
 
 # Create your views here.
 
@@ -74,3 +76,14 @@ class Separator(View):
             except KeyError:
                 return render(request, self.template_name, {'data': '...'})
 
+
+class CreatePerson(APIView):
+    """http://127.0.0.1:8000/service/create"""
+    def post(self, request):
+        data = self.request.data
+        print("1....", data, type(data))
+        serializer = PersonSerializer(data=data)
+        print("S...", serializer)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(data)

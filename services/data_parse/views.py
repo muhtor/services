@@ -1,26 +1,22 @@
 from django.shortcuts import render
 from django.views import View
 import json
-JSON = 'data_parse/data'
 # Create your views here.
-
-new = [
-    {"id": 2, "name": "eshmat", "age": 24, "lang": "uz"},
-    {"id": 3, "name": "toshmat", "age": 25, "lang": "ru"}
-]
 
 
 class ParserView(View):
     """http://127.0.0.1:8000/parser/data"""
 
-    def parse_data(self, data):
-        # data = {'people': []}
-        # data['people'].append({
-        #     'name': 'Scott',
-        #     'website': 'stackabuse.com',
-        #     'from': 'Nebraska'
-        # })
-        with open(JSON + '.json', '+a') as outfile:
+    @staticmethod
+    def parse_data(data: dict = ()):
+        data = {'people': []}
+        data['people'].append({
+            'name': 'Scott',
+            'website': 'stackabuse.com',
+            'from': 'Nebraska'
+        })
+        file_json = 'data_parse/data'
+        with open(file_json + '.json', '+a') as outfile:
             json.dump(data, outfile)
             # _id = load_data[0]['id']
             # data['id'] = _id + 1
@@ -39,8 +35,11 @@ class ParserView(View):
             "age": request.POST['age'],
             "lang": request.POST['lang']
         }
-        result = self.parse_data(data=data)
-        print("Rs...", result, type(result))
+        # new = [
+        #     {"id": 2, "name": "eshmat", "age": 24, "lang": "uz"},
+        #     {"id": 3, "name": "toshmat", "age": 25, "lang": "ru"}
+        # ]
+        self.parse_data(data=data)
         return render(request, self.template_name)
 
 

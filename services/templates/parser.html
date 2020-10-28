@@ -60,6 +60,7 @@
     </style>
 </head>
 <body>
+<div><h2 id="time" style="text-align: center"></h2></div>
 <div class="container">
     <div class="box">
         <div class="card">
@@ -75,5 +76,14 @@
         </div>
     </div>
 </div>
+<script>
+    let time = setInterval(function() {
+        let date = new Date();
+        let second = (date.getSeconds() < 10) ? ('0' + date.getSeconds()) : ('' + date.getSeconds())
+        document.getElementById("time").innerHTML = (date.getHours() + ":"
+            + date.getMinutes() + ":" + second);
+        }, 1000);
+
+</script>
 </body>
 </html>
